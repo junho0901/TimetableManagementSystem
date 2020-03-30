@@ -26,8 +26,7 @@ public class menu {
 		}
 		else {
 			continue;
-		}
-		
+		}		
 	}
 
 }
@@ -50,17 +49,18 @@ public class menu {
 		System.out.println(phone);		
 	}
 
-
 	public static void deleteTimetable() {
 		Scanner input = new Scanner(System.in);
 		System.out.print("Subject: ");
 		String subject = input.next();
 	}
+	
 	public static void editTimetable() {
 		Scanner input = new Scanner(System.in);
 		System.out.print("Subject: ");
 		String subject = input.next();
 	}
+	
 	public static void viewTimetable() {
 		Scanner input = new Scanner(System.in);
 		System.out.print("Subject: ");
