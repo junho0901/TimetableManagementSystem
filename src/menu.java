@@ -1,7 +1,7 @@
 import java.util.Scanner;
 
 public class menu {
-//Timetable Management Menu Project
+//Timetable Management Menu
 	public static void main(String[] args) {
 		Scanner input = new Scanner(System.in);
 		int num=5;
