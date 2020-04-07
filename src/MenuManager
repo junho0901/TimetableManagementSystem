@@ -1,0 +1,36 @@
+import java.util.Scanner;
+
+public class MenuManager {
+	public static void main(String[]args) {
+		Scanner input = new Scanner(System.in);
+		TimetableManager timetablemanager = new TimetableManager(input);
+		 
+		int num = -1;
+		while(num != 5) {
+			System.out.println(" Timetable Management System Menu ***");
+			System.out.println(" 1. Add Timetable ");
+			System.out.println(" 2. Delete Timetable ");
+			System.out.println(" 3. Edit Timetable ");
+			System.out.println(" 4. View Timetable ");
+			System.out.println(" 5. Exit ");
+			System.out.println(" Select one number between 1 - 5 ");
+			num = input.nextInt();
+			if(num == 1) {
+				timetablemanager.addTimetable();
+			}
+			else if(num == 2) {
+				timetablemanager.deleteTimetable();
+			}
+			else if(num == 3) {
+				timetablemanager.editTimetable();
+			}
+			else if(num == 4) {
+				timetablemanager.viewTimetable();
+			}
+			else {
+				continue;
+			}		
+		}
+	}
+}
+
