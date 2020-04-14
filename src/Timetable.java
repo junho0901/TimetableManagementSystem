@@ -25,5 +25,6 @@ public class Timetable {
 		System.out.println("when: " + time);
 		System.out.println("A professor's email: " + email);
 		System.out.println("A professor's phone number: " + phone);
+		System.out.println("");
 	}
 }

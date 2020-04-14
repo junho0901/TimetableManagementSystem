@@ -11,7 +11,7 @@ public class MenuManager {
 			System.out.println(" 1. Add Timetable ");
 			System.out.println(" 2. Delete Timetable ");
 			System.out.println(" 3. Edit Timetable ");
-			System.out.println(" 4. View Timetable ");
+			System.out.println(" 4. View Timetables ");
 			System.out.println(" 5. Exit ");
 			System.out.println(" Select one number between 1 - 5 ");
 			num = input.nextInt();
@@ -25,7 +25,7 @@ public class MenuManager {
 				timetablemanager.editTimetable();
 			}
 			else if(num == 4) {
-				timetablemanager.viewTimetable();
+				timetablemanager.viewTimetables();
 			}
 			else {
 				continue;
