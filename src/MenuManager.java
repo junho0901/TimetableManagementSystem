@@ -1,4 +1,4 @@
-import java.util.Scanner;
+ import java.util.Scanner;
 
 public class MenuManager {
 	public static void main(String[]args) {
@@ -33,4 +33,3 @@ public class MenuManager {
 		}
 	}
 }
-

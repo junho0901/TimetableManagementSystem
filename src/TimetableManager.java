@@ -9,19 +9,32 @@ public class TimetableManager{
 	}
 	
 	public void addTimetable() {
+		int kind = 0;
 		Timetable timetable = new Timetable();
-		System.out.print("Subject: ");
-		timetable.subject = input.next();
-		System.out.print("Professor: ");
-		timetable.name = input.next();
-		System.out.print("When: ");
-		timetable.time = input.next();
-		System.out.print("A professor's email address: ");
-		timetable.email = input.next();
-		System.out.print("A professor's phone number: ");
-		timetable.phone = input.next();
-		Timetables.add(timetable);
+		while(kind != 1 && kind != 2 ) {
+		System.out.println("1- Field Lecture");
+		System.out.println("2- E-learning");
+		System.out.println("Select the number for the course between 1 and 2: ");
+		kind = input.nextInt();
+		if (kind==1) {
+			timetable = new Timetable();
+			timetable.getUserInput(input);
+			Timetables.add(timetable);
+			break;
+			
+		}
+		else if(kind == 2) {
+			timetable = new Elearning();
+			timetable.getUserInput(input);
+			Timetables.add(timetable);
+			break;
+			
+		}
+		else {
+		System.out.print("Select number for the course between 1 and 2: ");
+		}
 	}
+}
 
 
 	public void deleteTimetable() {
@@ -29,7 +42,7 @@ public class TimetableManager{
 		String timetablesubject = input.next();
 		int index = -3;
 		for(int i = 0; i<Timetables.size(); i++) {
-			if(Timetables.get(i).subject.equals(timetablesubject)) {
+			if(Timetables.get(i).getSubject().equals(timetablesubject)) {
 				index = i;
 				break;
 			}
@@ -51,7 +64,7 @@ public class TimetableManager{
 		String timetablesubject = input.next();
 		for(int i = 0; i<Timetables.size(); i++) {
 			Timetable timetable = Timetables.get(i);
-			if(timetable.subject.equals(timetablesubject)) {
+			if(timetable.getSubject().equals(timetablesubject)) {
 				int num = -1;
 				while(num != 6) {
 					System.out.println(" ** Timetable Info edit Menu **");
@@ -65,23 +78,28 @@ public class TimetableManager{
 					num = input.nextInt();
 					if(num == 1) {
 						System.out.print("Subject: ");
-						timetable.subject = input.next();
+						String subject = input.next();
+						timetable.setSubject(subject);
 					}
 					else if(num == 2) {
 						System.out.print("Professor: ");
-						timetable.name = input.next();
+						String name = input.next();
+						timetable.setSubject(name);
 					}
 					else if(num == 3) {
 						System.out.print("when: ");
-						timetable.time = input.next();
+						String time = input.next();
+						timetable.setSubject(time);
 					}
 					else if(num == 4) {
 						System.out.print("A professor's email address: ");
-						timetable.email = input.next();
+						String email = input.next();
+						timetable.setSubject(email);
 					}
 					else if(num == 5) {
 						System.out.print("A professor's phone number: ");
-						timetable.phone = input.next();
+						String phone = input.next();
+						timetable.setSubject(phone);
 					}
 					else{
 						continue;
@@ -92,6 +110,7 @@ public class TimetableManager{
 		} //for ³¡
 } 
 	public void viewTimetables(){
+		System.out.println("# of registered Timetables: " + Timetables.size());
 		for(int i = 0; i<Timetables.size(); i++) {
 			System.out.println("**Information**");
 			Timetables.get(i).printInfo();
