@@ -11,31 +11,36 @@ public class TimetableManager{
 	public void addTimetable() {
 		int kind = 0;
 		Timetable timetable = new Timetable();
-		while(kind != 1 && kind != 2 ) {
+		while(kind != 1 && kind != 2) {
 		System.out.println("1- Field Lecture");
 		System.out.println("2- E-learning");
-		System.out.println("Select the number for the course between 1 and 2: ");
+		System.out.println("3- Lecture With the assistant professor");		
+		System.out.println("Select the number for the course between 1-3: ");
 		kind = input.nextInt();
 		if (kind==1) {
-			timetable = new Timetable();
+			timetable = new Timetable(TimetableKind.FieldLecture);
 			timetable.getUserInput(input);
 			Timetables.add(timetable);
 			break;
 			
 		}
 		else if(kind == 2) {
-			timetable = new Elearning();
+			timetable = new Elearning(TimetableKind.Elearning);
 			timetable.getUserInput(input);
 			Timetables.add(timetable);
 			break;
-			
+		}
+		else if(kind == 3) {
+			timetable = new Assistant(TimetableKind.Assistant);
+			timetable.getUserInput(input);
+			Timetables.add(timetable);
+			break;
 		}
 		else {
 		System.out.print("Select number for the course between 1 and 2: ");
 		}
 	}
 }
-
 
 	public void deleteTimetable() {
 		System.out.print("Subject: ");

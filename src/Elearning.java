@@ -1,6 +1,10 @@
 import java.util.Scanner;
 
 public class Elearning extends Timetable {
+
+	public Elearning(TimetableKind kind) { 
+		super(kind);
+	}
 	
 	public void getUserInput(Scanner input) {
 		System.out.print("Subject: ");

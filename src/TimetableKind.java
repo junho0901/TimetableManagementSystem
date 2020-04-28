@@ -1,5 +1,6 @@
 
 public enum TimetableKind {
 	FieldLecture,
-	Elearning
+	Elearning,
+	Assistant,
 }
