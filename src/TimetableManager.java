@@ -61,7 +61,6 @@ public class TimetableManager{
 			System.out.println("The subject has not been registered");
 			return;
 		}
-		
 	}
 	
 	public void editTimetable(){
@@ -114,6 +113,26 @@ public class TimetableManager{
 			} //if ³¡
 		} //for ³¡
 } 
+	public void searchTimetables() {
+		System.out.print("Subject: ");
+		String timetablesubject = input.next();
+		int num = -1;
+		for(int i = 0; i<Timetables.size(); i++) {
+			if(Timetables.get(i).getSubject().equals(timetablesubject)) {
+				num = i;
+				break;
+			}
+		}
+		if(num >= 0) {
+			System.out.println("**Information***");
+			Timetables.get(num).printInfo();
+		}
+		else {
+			System.out.println("The subject has not been registered");
+			return;
+		}
+	}
+	
 	public void viewTimetables(){
 		System.out.println("# of registered Timetables: " + Timetables.size());
 		for(int i = 0; i<Timetables.size(); i++) {
