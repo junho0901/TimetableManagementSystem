@@ -1,24 +1,20 @@
 import java.util.Scanner;
 
-public class Assistant extends Timetable {
+public class Assistant extends Timetable{
 	protected String Assistantemail;
 	protected String Assistantphone;
-	
+	Scanner sc = new Scanner(System.in);
+	String assist;
 	public Assistant(TimetableKind kind) { 
 		super(kind);
 	}
+	
 	public void getUserInput(Scanner input) {
-		System.out.print("Subject: ");
-		String subject = input.next();
-		this.setSubject(subject);
-		
-		System.out.print("Professor: ");
-		String name = input.next();
-		this.setName(name);
-		
-		System.out.print("When: ");
-		String time = input.next();
-		this.setTime(time);
+		setTimetableSubject(input);
+		setTimetableName(input);
+		setTimetableTime(input);
+		setTimetableEmail(input);
+		setTimetablePhone(input);
 		
 		char answer = 'x';
 		while(answer != 'y' && answer != 'Y' && answer != 'n' && answer != 'N') {
@@ -26,38 +22,34 @@ public class Assistant extends Timetable {
 			System.out.print("Is this class with the Assistant professor?? (Yes or No)" );
 			answer = input.next().charAt(0);
 			if (answer == 'y'|| answer == 'Y') {
-				System.out.print("The Assistant Professor:  " );
-				String professor = input.next();
-				this.setPhone(professor);
-				
+				System.out.print("Assistant professor: ");
+				assist = sc.nextLine();
 				break;
 			}
 			else if (answer == 'n'|| answer == 'N') {
-				this.setPhone("");
+				this.setName("");
 				break;
 			}
 			else {
 			}
 		}
 		
-		
-			answer = 'x';
+		answer = 'x';
 		while(answer != 'y' && answer != 'Y' && answer != 'n' && answer != 'N') {
 			
 			System.out.print("Do you have the assistant professor's phone number?? (Yes or No)" );
 			answer = input.next().charAt(0);
 			if (answer == 'y'|| answer == 'Y') {
-				System.out.print("Tel :  " );
-				String phone = input.next();
-				this.setPhone(phone);
+				setTimetablePhone(input);
 				break;
 			}
 			else if (answer == 'n'|| answer == 'N') {
 				this.setPhone("");
 				break;
-			}
+			}   
 			else {
 			}
+			setTimetablePhone(input);
 		}
 		answer = 'x';
 		while(answer != 'y' && answer != 'Y' && answer != 'n' && answer != 'N') {
@@ -65,9 +57,7 @@ public class Assistant extends Timetable {
 			System.out.print("Do you have the assistant professor's email address?? (Yes or No)" );
 			answer = input.next().charAt(0);
 			if (answer == 'y'|| answer == 'Y') {
-				System.out.print("Email Address: " );
-				String email = input.next();
-				this.setEmail(email);
+				setTimetableEmail(input);
 				break;
 			}
 			else if (answer == 'n'|| answer == 'N') {
@@ -78,29 +68,15 @@ public class Assistant extends Timetable {
 			}
 		}
 	}
-	
 	public void printInfo() {
-		String ekind ="none";
-		switch(this.kind) {
-		case FieldLecture:
-			ekind = "Face to Face";
-			break;
-		case Elearning:
-			ekind = "Online class";
-			break;
-		case Assistant:
-			ekind = "Lecture with the assistant professor";
-			break;
-		default:
-		}
+		String ekind = getKindString();
 		System.out.println("kind: " + ekind);
 		System.out.println("Subject: " + subject);
 		System.out.println("Professor: " + name);
 		System.out.println("When: " + time);
-		System.out.println("Assistant professor's phone: " + phone);
+		System.out.println("Assistant professor: " + assist);
 		System.out.println("Assistant professor's phone: " + phone);
 		System.out.println("Assistant professor's Email address: : " + email);
 		System.out.println("");
 	}
-		
 }

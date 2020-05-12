@@ -1,5 +1,6 @@
 import java.util.*;
-public class Timetable {
+
+public abstract class Timetable implements TimetableInput {
 
 	protected TimetableKind kind = TimetableKind.FieldLecture;
 	protected String subject;
@@ -7,7 +8,6 @@ public class Timetable {
 	protected String time;
 	protected String email;
 	protected String phone;
-	
 	
 	public Timetable() {
 	}
@@ -72,8 +72,34 @@ public class Timetable {
 	public void setPhone(String phone) {
 		this.phone = phone;
 	}
+	public abstract void printInfo();
 	
-	public void printInfo() {
+	public void setTimetableSubject(Scanner input) {
+		System.out.print("Subject: ");
+		String subject = input.next();
+		this.setSubject(subject);	
+	}
+	public void setTimetableName(Scanner input) {
+		System.out.print("Professor: ");
+		String name = input.next();
+		this.setName(name);
+	}
+	public void setTimetableTime(Scanner input) {
+		System.out.print("when: ");
+		String time = input.next();
+		this.setTime(time);
+	}
+	public void setTimetableEmail(Scanner input) {
+		System.out.print("email address: ");
+		String email = input.next();
+		this.setEmail(email);
+	}
+	public void setTimetablePhone(Scanner input) {
+		System.out.print("phone number: ");
+		String phone = input.next();
+		this.setPhone(phone);
+	}
+	public String getKindString() {
 		String ekind ="none";
 		switch(this.kind) {
 		case FieldLecture:
@@ -87,33 +113,6 @@ public class Timetable {
 			break;
 		default:
 		}
-		System.out.println("kind: " + ekind);
-		System.out.println("Subject: " + subject);
-		System.out.println("Professor: " + name);
-		System.out.println("when: " + time);
-		System.out.println("A professor's email: " + email);
-		System.out.println("A professor's phone number: " + phone);
-		System.out.println("");
-	}
-	public void getUserInput(Scanner input) {
-		System.out.print("Subject: ");
-		String subject = input.next();
-		this.setSubject(subject);
-		
-		System.out.print("Professor: ");
-		String name = input.next();
-		this.setName(name);
-		
-		System.out.print("When: ");
-		String time = input.next();
-		this.setTime(time);
-		
-		System.out.print("A professor's email address: ");
-		String email = input.next();
-		this.setEmail(email);
-		
-		System.out.print("A professor's phone number: ");
-		String phone = input.next();
-		this.setPhone(phone);
+		return ekind;
 	}
 }

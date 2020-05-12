@@ -2,7 +2,7 @@ import java.util.*;
 import java.util.ArrayList;
 
 public class TimetableManager{
-	ArrayList<Timetable> Timetables = new ArrayList<Timetable>();
+	ArrayList<TimetableInput> Timetables = new ArrayList<TimetableInput>();
 	Scanner input;
 	TimetableManager(Scanner input){
 		this.input= input;
@@ -10,7 +10,7 @@ public class TimetableManager{
 	
 	public void addTimetable() {
 		int kind = 0;
-		Timetable timetable = new Timetable();
+		TimetableInput timetableInput;
 		while(kind != 1 && kind != 2) {
 		System.out.println("1- Field Lecture");
 		System.out.println("2- E-learning");
@@ -18,22 +18,22 @@ public class TimetableManager{
 		System.out.println("Select the number for the course between 1-3: ");
 		kind = input.nextInt();
 		if (kind==1) {
-			timetable = new Timetable(TimetableKind.FieldLecture);
-			timetable.getUserInput(input);
-			Timetables.add(timetable);
+			timetableInput = new FieldLecture(TimetableKind.FieldLecture);
+			timetableInput.getUserInput(input);
+			Timetables.add(timetableInput);
 			break;
 			
 		}
 		else if(kind == 2) {
-			timetable = new Elearning(TimetableKind.Elearning);
-			timetable.getUserInput(input);
-			Timetables.add(timetable);
+			timetableInput = new Elearning(TimetableKind.Elearning);
+			timetableInput.getUserInput(input);
+			Timetables.add(timetableInput);
 			break;
 		}
 		else if(kind == 3) {
-			timetable = new Assistant(TimetableKind.Assistant);
-			timetable.getUserInput(input);
-			Timetables.add(timetable);
+			timetableInput = new Assistant(TimetableKind.Assistant);
+			timetableInput.getUserInput(input);
+			Timetables.add(timetableInput);
 			break;
 		}
 		else {
@@ -45,73 +45,64 @@ public class TimetableManager{
 	public void deleteTimetable() {
 		System.out.print("Subject: ");
 		String timetablesubject = input.next();
+		int index = findIndex(timetablesubject);
+		removefromeTimetable(index, timetablesubject);
+	}
+	
+	public int findIndex(String timetablesubject) {
 		int index = -3;
 		for(int i = 0; i<Timetables.size(); i++) {
 			if(Timetables.get(i).getSubject().equals(timetablesubject)) {
 				index = i;
 				break;
-			}
 		}
-		
+	} return index;
+}	
+	
+	public int removefromeTimetable(int index, String timetablesubject) {
 		if(index >= 0) {
 			Timetables.remove(index);
 			System.out.println("The subject" + timetablesubject +" is deleted");
+			return 1;
 		}
 		else {
 			System.out.println("The subject has not been registered");
-			return;
+			return -1;
 		}
 	}
-	
 	public void editTimetable(){
 		System.out.print("Subject: ");
 		String timetablesubject = input.next();
 		for(int i = 0; i<Timetables.size(); i++) {
-			Timetable timetable = Timetables.get(i);
+			TimetableInput timetable = Timetables.get(i);
 			if(timetable.getSubject().equals(timetablesubject)) {
 				int num = -1;
 				while(num != 6) {
-					System.out.println(" ** Timetable Info edit Menu **");
-					System.out.println(" 1. Edit subject ");
-					System.out.println(" 2. Edit professor ");
-					System.out.println(" 3. Edit time ");
-					System.out.println(" 4. Edit Email adress ");
-					System.out.println(" 5. Edit Phone number ");
-					System.out.println(" 6. Exit");
-					System.out.println(" Select one number between 1 - 6 ");
+					showEditMenu();
 					num = input.nextInt();
-					if(num == 1) {
-						System.out.print("Subject: ");
-						String subject = input.next();
-						timetable.setSubject(subject);
-					}
-					else if(num == 2) {
-						System.out.print("Professor: ");
-						String name = input.next();
-						timetable.setSubject(name);
-					}
-					else if(num == 3) {
-						System.out.print("when: ");
-						String time = input.next();
-						timetable.setSubject(time);
-					}
-					else if(num == 4) {
-						System.out.print("A professor's email address: ");
-						String email = input.next();
-						timetable.setSubject(email);
-					}
-					else if(num == 5) {
-						System.out.print("A professor's phone number: ");
-						String phone = input.next();
-						timetable.setSubject(phone);
-					}
-					else{
-						continue;
-					} //if 场
-				}	//while 场
+					switch(num) {
+					case 1:
+						timetable.setTimetableSubject(input);
 						break;
-			} //if 场
-		} //for 场
+					case 2:
+						timetable.setTimetableName(input);
+						break;
+					case 3:
+						timetable.setTimetableTime(input);
+						break;
+					case 4:
+						timetable.setTimetableEmail(input);
+						break;
+					case 5:
+						timetable.setTimetablePhone(input);
+						break;
+					default:
+						continue;
+					}
+				}	//while 
+						break;
+			} //if 
+		} //for 
 } 
 	public void searchTimetables() {
 		System.out.print("Subject: ");
@@ -139,6 +130,17 @@ public class TimetableManager{
 			System.out.println("**Information**");
 			Timetables.get(i).printInfo();
 		}
-	}		
+	}	
+	
+	public void showEditMenu() {
+		System.out.println(" ** Timetable Info edit Menu **");
+		System.out.println(" 1. Edit subject ");
+		System.out.println(" 2. Edit professor ");
+		System.out.println(" 3. Edit time ");
+		System.out.println(" 4. Edit Email adress ");
+		System.out.println(" 5. Edit Phone number ");
+		System.out.println(" 6. Exit");
+		System.out.println(" Select one number between 1 - 6 ");
+	}
 }
 		
