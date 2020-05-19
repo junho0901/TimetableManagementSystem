@@ -1,14 +1,20 @@
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class MenuManager {
 	public static void main(String[]args) {
 		Scanner input = new Scanner(System.in);
 		TimetableManager timetablemanager = new TimetableManager(input);
-		 
+
+		selectMenu(input, timetablemanager);
+	}
+
+	public static void selectMenu(Scanner input, TimetableManager timetablemanager) {
 		int num = -1;
 		while(num != 6) {
-			showMenu();
-			num = input.nextInt();
+			try {
+				showMenu();
+				num = input.nextInt();
 				switch(num) {
 				case 1:
 					timetablemanager.addTimetable();
@@ -26,10 +32,16 @@ public class MenuManager {
 					timetablemanager.viewTimetables();
 				default:
 					continue;
-				}		
+				}	
+			}catch(InputMismatchException e) {
+				System.out.println("Please Select the number between 1 -6");
+				if(input.hasNext()) {
+					input.next();
+				}
+				num = -1;
+			}
 		}
 	}
-	
 	public static void showMenu() {
 		System.out.println(" Timetable Management System Menu ***");
 		System.out.println(" 1. Add Timetable ");

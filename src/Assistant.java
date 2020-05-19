@@ -1,5 +1,7 @@
 import java.util.Scanner;
 
+import exception.EmailFormatException;
+
 public class Assistant extends Timetable{
 	protected String Assistantemail;
 	protected String Assistantphone;
@@ -8,35 +10,17 @@ public class Assistant extends Timetable{
 	public Assistant(TimetableKind kind) { 
 		super(kind);
 	}
-	
+
 	public void getUserInput(Scanner input) {
 		setTimetableSubject(input);
 		setTimetableName(input);
 		setTimetableTime(input);
-		setTimetableEmail(input);
-		setTimetablePhone(input);
+		System.out.print("Assistant professor: ");
+		assist = sc.nextLine();
 		
 		char answer = 'x';
 		while(answer != 'y' && answer != 'Y' && answer != 'n' && answer != 'N') {
-			
-			System.out.print("Is this class with the Assistant professor?? (Yes or No)" );
-			answer = input.next().charAt(0);
-			if (answer == 'y'|| answer == 'Y') {
-				System.out.print("Assistant professor: ");
-				assist = sc.nextLine();
-				break;
-			}
-			else if (answer == 'n'|| answer == 'N') {
-				this.setName("");
-				break;
-			}
-			else {
-			}
-		}
-		
-		answer = 'x';
-		while(answer != 'y' && answer != 'Y' && answer != 'n' && answer != 'N') {
-			
+
 			System.out.print("Do you have the assistant professor's phone number?? (Yes or No)" );
 			answer = input.next().charAt(0);
 			if (answer == 'y'|| answer == 'Y') {
@@ -53,18 +37,23 @@ public class Assistant extends Timetable{
 		}
 		answer = 'x';
 		while(answer != 'y' && answer != 'Y' && answer != 'n' && answer != 'N') {
-			
+
 			System.out.print("Do you have the assistant professor's email address?? (Yes or No)" );
 			answer = input.next().charAt(0);
-			if (answer == 'y'|| answer == 'Y') {
-				setTimetableEmail(input);
-				break;
+			try {
+				if (answer == 'y'|| answer == 'Y') {
+					setTimetableEmail(input);
+					break;
+				}
+				else if (answer == 'n'|| answer == 'N') {
+					this.setEmail("");
+					break;
+				}
+				else {
+				}
 			}
-			else if (answer == 'n'|| answer == 'N') {
-				this.setEmail("");
-				break;
-			}
-			else {
+			catch(EmailFormatException e) {
+				System.out.println("Incorrect Email Format. Put the Email Address that contains @");
 			}
 		}
 	}

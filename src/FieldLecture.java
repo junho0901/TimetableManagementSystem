@@ -1,7 +1,7 @@
 import java.util.Scanner;
 
 public class FieldLecture extends Timetable{
-	
+
 	public FieldLecture(TimetableKind kind) { 
 		super(kind);
 	}
@@ -13,7 +13,7 @@ public class FieldLecture extends Timetable{
 		setTimetableEmail(input);
 		setTimetablePhone(input);
 	}
-	
+
 	public void printInfo() {
 		String ekind = getKindString();
 		System.out.println("kind: " + ekind);

@@ -5,10 +5,10 @@ public abstract class Undergradurate extends Timetable {
 	public Undergradurate(TimetableKind kind) { 
 		super(kind);
 	}
-	
+
 	public abstract void getUserInput(Scanner input);
-		
-	
+
+
 	public void printInfo() {
 		String ekind = getKindString();
 		System.out.println("kind: " + ekind);
@@ -19,11 +19,11 @@ public abstract class Undergradurate extends Timetable {
 		System.out.println("A professor's phone number: " + phone);
 		System.out.println("");
 	}
-	
+
 	public void setTimewithYN(Scanner input) {
 		char answer = 'x';
 		while(answer != 'y' && answer != 'Y' && answer != 'n' && answer != 'N') {
-			
+
 			System.out.print("Is this lecture in real-time video?? (Yes or No)" );
 			answer = input.next().charAt(0);
 			if (answer == 'y'|| answer == 'Y') {
@@ -40,6 +40,5 @@ public abstract class Undergradurate extends Timetable {
 			}
 		}
 	}
-	
-}
 
+}

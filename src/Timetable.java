@@ -1,5 +1,7 @@
 import java.util.*;
 
+import exception.EmailFormatException;
+
 public abstract class Timetable implements TimetableInput {
 
 	protected TimetableKind kind = TimetableKind.FieldLecture;
@@ -8,10 +10,10 @@ public abstract class Timetable implements TimetableInput {
 	protected String time;
 	protected String email;
 	protected String phone;
-	
+
 	public Timetable() {
 	}
-	
+
 	public Timetable(TimetableKind kind) { 
 		this.kind = kind;
 	}
@@ -35,7 +37,7 @@ public abstract class Timetable implements TimetableInput {
 		this.email= email;
 		this.phone= phone;
 	}
-	
+
 	public TimetableKind getKind() {
 		return kind;
 	}
@@ -63,7 +65,10 @@ public abstract class Timetable implements TimetableInput {
 	public String getEmail() {
 		return email;
 	}
-	public void setEmail(String email) {
+	public void setEmail(String email) throws EmailFormatException{
+		if(!email.contains("@") && !email.equals("")) {
+			throw new EmailFormatException();
+		}
 		this.email = email;
 	}
 	public String getPhone() {
@@ -73,7 +78,7 @@ public abstract class Timetable implements TimetableInput {
 		this.phone = phone;
 	}
 	public abstract void printInfo();
-	
+
 	public void setTimetableSubject(Scanner input) {
 		System.out.print("Subject: ");
 		String subject = input.next();
@@ -90,9 +95,16 @@ public abstract class Timetable implements TimetableInput {
 		this.setTime(time);
 	}
 	public void setTimetableEmail(Scanner input) {
-		System.out.print("email address: ");
-		String email = input.next();
-		this.setEmail(email);
+		String email ="";
+		while(!email.contains("@")) {
+			System.out.print("email address: ");
+			email = input.next();
+			try {
+				this.setEmail(email);
+			} catch (EmailFormatException e) {
+				System.out.println("Incorrect Email Format. put the Email address that contains @");
+			}
+		}
 	}
 	public void setTimetablePhone(Scanner input) {
 		System.out.print("phone number: ");

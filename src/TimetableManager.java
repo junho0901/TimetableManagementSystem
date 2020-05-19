@@ -7,40 +7,47 @@ public class TimetableManager{
 	TimetableManager(Scanner input){
 		this.input= input;
 	}
-	
+
 	public void addTimetable() {
 		int kind = 0;
 		TimetableInput timetableInput;
-		while(kind != 1 && kind != 2) {
-		System.out.println("1- Field Lecture");
-		System.out.println("2- E-learning");
-		System.out.println("3- Lecture With the assistant professor");		
-		System.out.println("Select the number for the course between 1-3: ");
-		kind = input.nextInt();
-		if (kind==1) {
-			timetableInput = new FieldLecture(TimetableKind.FieldLecture);
-			timetableInput.getUserInput(input);
-			Timetables.add(timetableInput);
-			break;
-			
-		}
-		else if(kind == 2) {
-			timetableInput = new Elearning(TimetableKind.Elearning);
-			timetableInput.getUserInput(input);
-			Timetables.add(timetableInput);
-			break;
-		}
-		else if(kind == 3) {
-			timetableInput = new Assistant(TimetableKind.Assistant);
-			timetableInput.getUserInput(input);
-			Timetables.add(timetableInput);
-			break;
-		}
-		else {
-		System.out.print("Select number for the course between 1 and 2: ");
+		while(kind <1 || kind >3) {
+			try {
+				System.out.println("1- Field Lecture");
+				System.out.println("2- E-learning");
+				System.out.println("3- Lecture With the assistant professor");		
+				System.out.println("Select the number for the course between 1-3: ");
+				kind = input.nextInt();
+				if (kind==1) {
+					timetableInput = new FieldLecture(TimetableKind.FieldLecture);
+					timetableInput.getUserInput(input);
+					Timetables.add(timetableInput);
+					break;
+				}
+				else if(kind == 2) {
+					timetableInput = new Elearning(TimetableKind.Elearning);
+					timetableInput.getUserInput(input);
+					Timetables.add(timetableInput);
+					break;
+				}
+				else if(kind == 3) {
+					timetableInput = new Assistant(TimetableKind.Assistant);
+					timetableInput.getUserInput(input);
+					Timetables.add(timetableInput);
+					break;
+				}
+				else {
+					System.out.print("Please Select the number between 1 and 3: ");
+				}
+			}		catch(InputMismatchException e) {
+				System.out.println("Please Select the number between 1 -3");
+				if(input.hasNext()) {
+					input.next();
+				}
+				kind = -1;
+			}
 		}
 	}
-}
 
 	public void deleteTimetable() {
 		System.out.print("Subject: ");
@@ -48,17 +55,17 @@ public class TimetableManager{
 		int index = findIndex(timetablesubject);
 		removefromeTimetable(index, timetablesubject);
 	}
-	
+
 	public int findIndex(String timetablesubject) {
 		int index = -3;
 		for(int i = 0; i<Timetables.size(); i++) {
 			if(Timetables.get(i).getSubject().equals(timetablesubject)) {
 				index = i;
 				break;
-		}
-	} return index;
-}	
-	
+			}
+		} return index;
+	}	
+
 	public int removefromeTimetable(int index, String timetablesubject) {
 		if(index >= 0) {
 			Timetables.remove(index);
@@ -100,10 +107,10 @@ public class TimetableManager{
 						continue;
 					}
 				}	//while 
-						break;
+				break;
 			} //if 
 		} //for 
-} 
+	} 
 	public void searchTimetables() {
 		System.out.print("Subject: ");
 		String timetablesubject = input.next();
@@ -123,7 +130,7 @@ public class TimetableManager{
 			return;
 		}
 	}
-	
+
 	public void viewTimetables(){
 		System.out.println("# of registered Timetables: " + Timetables.size());
 		for(int i = 0; i<Timetables.size(); i++) {
@@ -131,7 +138,7 @@ public class TimetableManager{
 			Timetables.get(i).printInfo();
 		}
 	}	
-	
+
 	public void showEditMenu() {
 		System.out.println(" ** Timetable Info edit Menu **");
 		System.out.println(" 1. Edit subject ");
@@ -143,4 +150,3 @@ public class TimetableManager{
 		System.out.println(" Select one number between 1 - 6 ");
 	}
 }
-		
