@@ -1,9 +1,14 @@
+import java.io.Serializable;
 import java.util.*;
 
 import exception.EmailFormatException;
 
-public abstract class Timetable implements TimetableInput {
+public abstract class Timetable implements TimetableInput, Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	protected TimetableKind kind = TimetableKind.FieldLecture;
 	protected String subject;
 	protected String name;
