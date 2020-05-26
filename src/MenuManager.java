@@ -1,15 +1,31 @@
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.InputMismatchException;
 import java.util.Scanner;
+import log.EventLogger;
 
 public class MenuManager {
+	static EventLogger logger = new EventLogger("log.txt");
+
 	public static void main(String[]args) {
+		
 		Scanner input = new Scanner(System.in);
-		TimetableManager timetablemanager = new TimetableManager(input);
-
-		selectMenu(input, timetablemanager);
+		TimetableManager timetableManager = getObject("timetableamanager.ser");
+		if(timetableManager ==null) {
+			timetableManager = new TimetableManager(input);
+		}
+		else {
+			timetableManager.setScanner(input);
+		}
+		
+		selectMenu(input, timetableManager);
+		putObject(timetableManager, "timetablemanager.ser");
 	}
-
-	public static void selectMenu(Scanner input, TimetableManager timetablemanager) {
+	public static void selectMenu(Scanner input, TimetableManager timetableManager) {
 		int num = -1;
 		while(num != 6) {
 			try {
@@ -17,19 +33,24 @@ public class MenuManager {
 				num = input.nextInt();
 				switch(num) {
 				case 1:
-					timetablemanager.addTimetable();
+					timetableManager.addTimetable();
+					logger.log("add a timetable");
 					break;
 				case 2:
-					timetablemanager.deleteTimetable();
+					timetableManager.deleteTimetable();
+					logger.log("delete a timetable");
 					break;
 				case 3:
-					timetablemanager.editTimetable();
+					timetableManager.editTimetable();
+					logger.log("edit a timetable");
 					break;
 				case 4:
-					timetablemanager.searchTimetables();
+					timetableManager.searchTimetables();
+					logger.log("search a timetable");
 					break;
 				case 5:
-					timetablemanager.viewTimetables();
+					timetableManager.viewTimetables();
+					logger.log("view a list of timetable");
 				default:
 					continue;
 				}	
@@ -51,5 +72,47 @@ public class MenuManager {
 		System.out.println(" 5. View Timetables ");	
 		System.out.println(" 6. Exit ");
 		System.out.println(" Select one number between 1 - 6 ");
+	}
+	public static TimetableManager getObject(String filename) {
+		TimetableManager timetableManager = null;
+
+		try {
+			FileInputStream file = new FileInputStream(filename);
+			ObjectInputStream in = new ObjectInputStream(file);
+			timetableManager = (TimetableManager)in.readObject();
+
+			in.close();
+			file.close();
+
+		} catch (FileNotFoundException e) {
+			return timetableManager; 
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		return timetableManager;
+	}
+
+	public static void putObject(TimetableManager timetableManager ,String filename) {
+		try {
+			FileOutputStream file = new FileOutputStream(filename);
+			ObjectOutputStream out = new ObjectOutputStream(file);
+			
+			out.writeObject(timetableManager);
+			
+			out.close();
+			file.close();
+
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 }

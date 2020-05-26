@@ -1,9 +1,19 @@
-import java.util.*;
+import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.InputMismatchException;
+import java.util.Scanner;
 
-public class TimetableManager{
+public class TimetableManager implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 5424447484497898978L;
 	ArrayList<TimetableInput> Timetables = new ArrayList<TimetableInput>();
-	Scanner input;
+	transient Scanner input;
+	public void setScanner(Scanner input) {
+		this.input = input;
+	}
+	
 	TimetableManager(Scanner input){
 		this.input= input;
 	}
