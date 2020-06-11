@@ -3,28 +3,28 @@ package gui;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+import manager.TimetableManager;
+
 public class WindowFrame extends JFrame {
+	TimetableManager timetableManager;
+	
 	MenuSelection menuselection;
 	TimetableAdder timetableadder;
-	TimetableViewer timetableviewer;		
+	TimetableViewer timetableviewer;
 	
-	public WindowFrame() {
-		this.menuselection = new MenuSelection(this);
-		this.timetableadder = new TimetableAdder(this);
-		this.timetableviewer = new TimetableViewer(this);		
-	
-		this.setSize(500, 300);
+	public WindowFrame(TimetableManager timetableManager) {
+		this.setSize(550, 300);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		this.setTitle("My Frame");
 		
-		this.setupPanel(menuselection);
+		this.timetableManager = timetableManager;
+		menuselection = new MenuSelection(this);
+		timetableadder = new TimetableAdder(this);
+		timetableviewer = new TimetableViewer(this, this.timetableManager);		
+	
+		this.add(menuselection);
 		
 		this.setVisible(true);
-	}
-	public void setupPanel(JPanel panel) {
-		this.getContentPane().removeAll();
-		this.getContentPane().add(panel);
-		this.revalidate();
-		this.repaint();
 	}
 
 	public MenuSelection getMenuselection() {

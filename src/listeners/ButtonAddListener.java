@@ -18,8 +18,9 @@ public class ButtonAddListener implements ActionListener {
 	}
 
 	public void actionPerformed(ActionEvent e) {
-		JButton b = (JButton) e.getSource();
-		TimetableAdder adder = frame.getTimetableadder();
-		frame.setupPanel(adder);
+		frame.getContentPane().removeAll();
+		frame.getContentPane().add(frame.getTimetableadder());
+		frame.revalidate();
+		frame.repaint();
 	}
 }
