@@ -6,6 +6,7 @@ import javax.swing.JPanel;
 import manager.TimetableManager;
 
 public class WindowFrame extends JFrame {
+	
 	TimetableManager timetableManager;
 	
 	MenuSelection menuselection;
@@ -19,11 +20,11 @@ public class WindowFrame extends JFrame {
 		
 		this.timetableManager = timetableManager;
 		menuselection = new MenuSelection(this);
-		timetableadder = new TimetableAdder(this);
+		timetableadder = new TimetableAdder(this, this.timetableManager);
 		timetableviewer = new TimetableViewer(this, this.timetableManager);		
 	
 		this.add(menuselection);
-		
+		 
 		this.setVisible(true);
 	}
 

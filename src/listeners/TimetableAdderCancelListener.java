@@ -9,18 +9,19 @@ import gui.TimetableAdder;
 import gui.TimetableViewer;
 import gui.WindowFrame;
 
-public class ButtonAddListener implements ActionListener {
+public class TimetableAdderCancelListener implements ActionListener {
 
 	WindowFrame frame;
 	
-	public ButtonAddListener(WindowFrame frame) {
+	public TimetableAdderCancelListener(WindowFrame frame) {
 		this.frame = frame;
 	}
 
 	public void actionPerformed(ActionEvent e) {
 		frame.getContentPane().removeAll();
-		frame.getContentPane().add(frame.getTimetableadder());
+		frame.getContentPane().add(frame.getMenuselection());
 		frame.revalidate();
 		frame.repaint();
 	}
 }
+ 

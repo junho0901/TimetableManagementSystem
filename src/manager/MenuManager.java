@@ -77,9 +77,9 @@ public class MenuManager {
 		System.out.println(" 6. Exit ");
 		System.out.println(" Select one number between 1 - 6 ");
 	}
+	
 	public static TimetableManager getObject(String filename) {
-		TimetableManager timetableManager = null;
-
+		TimetableManager timetableManager = null;		
 		try {
 			FileInputStream file = new FileInputStream(filename);
 			ObjectInputStream in = new ObjectInputStream(file);
@@ -97,7 +97,6 @@ public class MenuManager {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
 		return timetableManager;
 	}
 

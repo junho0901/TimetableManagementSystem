@@ -18,18 +18,29 @@ public class TimetableManager implements Serializable{
 	 * 
 	 */
 	private static final long serialVersionUID = 5424447484497898978L;
-	
+
 	ArrayList<TimetableInput> Timetables = new ArrayList<TimetableInput>();
 	transient Scanner input;
-	
+
 	TimetableManager(Scanner input){
 		this.input= input;
 	}
-	
+
 	public void setScanner(Scanner input) {
 		this.input = input;
 	}
 
+
+	public void addTimetable(String subject, String name, String time, String phone, String email) {
+		TimetableInput timetableInput = new FieldLecture(TimetableKind.FieldLecture);
+		timetableInput.getUserInput(input);
+		Timetables.add(timetableInput);
+	}
+	
+	public void addTimetable(TimetableInput timetableInput) {
+		Timetables.add(timetableInput);
+	}
+	
 	public void addTimetable() {
 		int kind = 0;
 		TimetableInput timetableInput;
@@ -164,7 +175,7 @@ public class TimetableManager implements Serializable{
 	public int size() {
 		return Timetables.size();
 	}
-	
+
 	public TimetableInput get(int index) {
 		return (Timetable) Timetables.get(index);
 	}
